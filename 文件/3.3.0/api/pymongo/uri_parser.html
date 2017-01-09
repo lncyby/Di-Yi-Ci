@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>uri_parser – Tools to parse and validate a MongoDB URI &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="pymongo – Python driver for MongoDB" href="index.html" />
+    <link rel="next" title="write_concern – Tools for specifying write concern" href="write_concern.html" />
+    <link rel="prev" title="cursor_manager – Managers to handle when cursors are killed after being closed" href="cursor_manager.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="write_concern.html" title="write_concern – Tools for specifying write concern"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cursor_manager.html" title="cursor_manager – Managers to handle when cursors are killed after being closed"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pymongo.uri_parser">
+<span id="uri-parser-tools-to-parse-and-validate-a-mongodb-uri"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">uri_parser</span></code> &#8211; Tools to parse and validate a MongoDB URI<a class="headerlink" href="#module-pymongo.uri_parser" title="Permalink to this headline">¶</a></h1>
+<p>Tools to parse and validate a MongoDB URI.</p>
+<dl class="function">
+<dt id="pymongo.uri_parser.parse_host">
+<code class="descclassname">pymongo.uri_parser.</code><code class="descname">parse_host</code><span class="sig-paren">(</span><em>entity</em>, <em>default_port=27017</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.uri_parser.parse_host" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates a host string</p>
+<p>Returns a 2-tuple of host followed by port where port is default_port
+if it wasn&#8217;t specified in the string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last">
+<li><dl class="first docutils">
+<dt><cite>entity</cite>: A host or host:port string where host could be a</dt>
+<dd><p class="first last">hostname or IP address.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><cite>default_port</cite>: The port number to use when one wasn&#8217;t</dt>
+<dd><p class="first last">specified in entity.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.uri_parser.parse_ipv6_literal_host">
+<code class="descclassname">pymongo.uri_parser.</code><code class="descname">parse_ipv6_literal_host</code><span class="sig-paren">(</span><em>entity</em>, <em>default_port</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.uri_parser.parse_ipv6_literal_host" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates an IPv6 literal host:port string.</p>
+<p>Returns a 2-tuple of IPv6 literal followed by port where
+port is default_port if it wasn&#8217;t specified in entity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last">
+<li><dl class="first docutils">
+<dt><cite>entity</cite>: A string that represents an IPv6 literal enclosed</dt>
+<dd><p class="first last">in braces (e.g. &#8216;[::1]&#8217; or &#8216;[::1]:27017&#8217;).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><cite>default_port</cite>: The port number to use when one wasn&#8217;t</dt>
+<dd><p class="first last">specified in entity.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.uri_parser.parse_uri">
+<code class="descclassname">pymongo.uri_parser.</code><code class="descname">parse_uri</code><span class="sig-paren">(</span><em>uri</em>, <em>default_port=27017</em>, <em>validate=True</em>, <em>warn=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.uri_parser.parse_uri" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse and validate a MongoDB URI.</p>
+<p>Returns a dict of the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;nodelist&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">list</span> <span class="n">of</span> <span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span> <span class="n">tuples</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">password</span><span class="o">&gt;</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;database&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">database</span> <span class="n">name</span><span class="o">&gt;</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;collection&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">collection</span> <span class="n">name</span><span class="o">&gt;</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">dict</span> <span class="n">of</span> <span class="n">MongoDB</span> <span class="n">URI</span> <span class="n">options</span><span class="o">&gt;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>uri</cite>: The MongoDB URI to parse.</li>
+<li><cite>default_port</cite>: The port number to use when one wasn&#8217;t specified
+for a host in the URI.</li>
+<li><cite>validate</cite>: If <code class="docutils literal"><span class="pre">True</span></code> (the default), validate and normalize all
+options.</li>
+<li><cite>warn</cite> (optional): When validating, if <code class="docutils literal"><span class="pre">True</span></code> then will warn
+the user then ignore any invalid options or values. If <code class="docutils literal"><span class="pre">False</span></code>,
+validation will error when options are unsupported or values are
+invalid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.1: </span><code class="docutils literal"><span class="pre">warn</span></code> added so invalid options can be ignored.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.uri_parser.parse_userinfo">
+<code class="descclassname">pymongo.uri_parser.</code><code class="descname">parse_userinfo</code><span class="sig-paren">(</span><em>userinfo</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.uri_parser.parse_userinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the format of user information in a MongoDB URI.
+Reserved characters like &#8216;:&#8217;, &#8216;/&#8217;, &#8216;+&#8217; and &#8216;&#64;&#8217; must be escaped
+following RFC 2396.</p>
+<p>Returns a 2-tuple containing the unescaped username followed
+by the unescaped password.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramaters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>userinfo</cite>: A string of the form &lt;username&gt;:&lt;password&gt;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.2: </span>Now uses <cite>urllib.unquote_plus</cite> so <cite>+</cite> characters must be escaped.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.uri_parser.split_hosts">
+<code class="descclassname">pymongo.uri_parser.</code><code class="descname">split_hosts</code><span class="sig-paren">(</span><em>hosts</em>, <em>default_port=27017</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.uri_parser.split_hosts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a string of the form host1[:port],host2[:port]... and
+splits it into (host, port) tuples. If [:port] isn&#8217;t present the
+default_port is used.</p>
+<p>Returns a set of 2-tuples containing the host name (or IP) followed by
+port number.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>hosts</cite>: A string of the form host1[:port],host2[:port],...</li>
+<li><cite>default_port</cite>: The port number to use when one wasn&#8217;t specified
+for a host.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.uri_parser.split_options">
+<code class="descclassname">pymongo.uri_parser.</code><code class="descname">split_options</code><span class="sig-paren">(</span><em>opts</em>, <em>validate=True</em>, <em>warn=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.uri_parser.split_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the options portion of a MongoDB URI, validates each option
+and returns the options in a dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>opt</cite>: A string representing MongoDB URI options.</li>
+<li><cite>validate</cite>: If <code class="docutils literal"><span class="pre">True</span></code> (the default), validate and normalize all
+options.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.uri_parser.validate_options">
+<code class="descclassname">pymongo.uri_parser.</code><code class="descname">validate_options</code><span class="sig-paren">(</span><em>opts</em>, <em>warn=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.uri_parser.validate_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates and normalizes options passed in a MongoDB URI.</p>
+<p>Returns a new dictionary of validated and normalized options. If warn is
+False then errors will be thrown for invalid options, otherwise they will
+be ignored and a warning will be issued.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>opts</cite>: A dict of MongoDB URI options.</li>
+<li><cite>warn</cite> (optional): If <code class="docutils literal"><span class="pre">True</span></code> then warnigns will be logged and
+invalid options will be ignored. Otherwise invalid options will
+cause errors.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cursor_manager.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">cursor_manager</span></code> &#8211; Managers to handle when cursors are killed after being closed</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="write_concern.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">write_concern</span></code> &#8211; Tools for specifying write concern</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/pymongo/uri_parser.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="write_concern.html" title="write_concern – Tools for specifying write concern"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cursor_manager.html" title="cursor_manager – Managers to handle when cursors are killed after being closed"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

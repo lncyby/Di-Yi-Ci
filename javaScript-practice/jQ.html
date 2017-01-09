@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>菜鸟教程</title>
+    <script src = "./js/jquery-3.1.1.min.js"></script>
+    <style>
+      /*p {
+        display: none;
+      }*/
+    </style>
+    <script>
+      $(document).ready(function(){
+        $("#btn1").click(function(){
+          $("p").hide(function(){
+            alert("图片已经隐藏")
+          });
+
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button id="btn1">效果</button>
+    <button id="btn２">停止</button>
+    <p><img src="./0.jpg" alt="" ></p>
+
+  </body>
+</html>

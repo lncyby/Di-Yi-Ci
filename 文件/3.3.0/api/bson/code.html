@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>code – Tools for representing JavaScript code &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="bson – BSON (Binary JSON) Encoding and Decoding" href="index.html" />
+    <link rel="next" title="codec_options – Tools for specifying BSON codec options" href="codec_options.html" />
+    <link rel="prev" title="binary – Tools for representing binary data to be stored in MongoDB" href="binary.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="codec_options.html" title="codec_options – Tools for specifying BSON codec options"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="binary.html" title="binary – Tools for representing binary data to be stored in MongoDB"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-bson.code">
+<span id="code-tools-for-representing-javascript-code"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">code</span></code> &#8211; Tools for representing JavaScript code<a class="headerlink" href="#module-bson.code" title="Permalink to this headline">¶</a></h1>
+<p>Tools for representing JavaScript code in BSON.</p>
+<dl class="class">
+<dt id="bson.code.Code">
+<em class="property">class </em><code class="descclassname">bson.code.</code><code class="descname">Code</code><span class="sig-paren">(</span><em>code</em>, <em>scope=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.code.Code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">str</span></code></p>
+<p>BSON&#8217;s JavaScript code type.</p>
+<p>Raises <code class="xref py py-class docutils literal"><span class="pre">TypeError</span></code> if <cite>code</cite> is not an instance of
+<code class="xref py py-class docutils literal"><span class="pre">basestring</span></code> (<code class="xref py py-class docutils literal"><span class="pre">str</span></code> in python 3) or <cite>scope</cite>
+is not <code class="docutils literal"><span class="pre">None</span></code> or an instance of <code class="xref py py-class docutils literal"><span class="pre">dict</span></code>.</p>
+<p>Scope variables can be set by passing a dictionary as the <cite>scope</cite>
+argument or by using keyword arguments. If a variable is set as a
+keyword argument it will override any setting for that variable in
+the <cite>scope</cite> dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>code</cite>: string containing JavaScript code to be evaluated</li>
+<li><cite>scope</cite> (optional): dictionary representing the scope in which
+<cite>code</cite> should be evaluated - a mapping from identifiers (as
+strings) to values</li>
+<li><cite>**kwargs</cite> (optional): scope variables can also be passed as
+keyword arguments</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="bson.code.Code.scope">
+<code class="descname">scope</code><a class="headerlink" href="#bson.code.Code.scope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scope dictionary for this instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="binary.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">binary</span></code> &#8211; Tools for representing binary data to be stored in MongoDB</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="codec_options.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">codec_options</span></code> &#8211; Tools for specifying BSON codec options</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/bson/code.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="codec_options.html" title="codec_options – Tools for specifying BSON codec options"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="binary.html" title="binary – Tools for representing binary data to be stored in MongoDB"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

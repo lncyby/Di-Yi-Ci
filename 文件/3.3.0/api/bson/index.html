@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bson – BSON (Binary JSON) Encoding and Decoding &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="API Documentation" href="../index.html" />
+    <link rel="next" title="binary – Tools for representing binary data to be stored in MongoDB" href="binary.html" />
+    <link rel="prev" title="API Documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="binary.html" title="binary – Tools for representing binary data to be stored in MongoDB"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="API Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">API Documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-bson">
+<span id="bson-bson-binary-json-encoding-and-decoding"></span><h1><a class="reference internal" href="#module-bson" title="bson: BSON (Binary JSON) Encoding and Decoding"><code class="xref py py-mod docutils literal"><span class="pre">bson</span></code></a> &#8211; BSON (Binary JSON) Encoding and Decoding<a class="headerlink" href="#module-bson" title="Permalink to this headline">¶</a></h1>
+<p>BSON (Binary JSON) encoding and decoding.</p>
+<dl class="class">
+<dt id="bson.BSON">
+<em class="property">class </em><code class="descclassname">bson.</code><code class="descname">BSON</code><a class="headerlink" href="#bson.BSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>BSON (Binary JSON) data.</p>
+<dl class="method">
+<dt id="bson.BSON.decode">
+<code class="descname">decode</code><span class="sig-paren">(</span><em>codec_options=CodecOptions(document_class=dict</em>, <em>tz_aware=False</em>, <em>uuid_representation=PYTHON_LEGACY</em>, <em>unicode_decode_error_handler='strict'</em>, <em>tzinfo=None)</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.BSON.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode this BSON data.</p>
+<p>By default, returns a BSON document represented as a Python
+<code class="xref py py-class docutils literal"><span class="pre">dict</span></code>. To use a different <code class="xref py py-class docutils literal"><span class="pre">MutableMapping</span></code> class,
+configure a <a class="reference internal" href="codec_options.html#bson.codec_options.CodecOptions" title="bson.codec_options.CodecOptions"><code class="xref py py-class docutils literal"><span class="pre">CodecOptions</span></code></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">collections</span>  <span class="c1"># From Python standard library.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">bson</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bson.codec_options</span> <span class="k">import</span> <span class="n">CodecOptions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">bson</span><span class="o">.</span><span class="n">BSON</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decoded_doc</span> <span class="o">=</span> <span class="n">bson</span><span class="o">.</span><span class="n">BSON</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="go">&lt;type &#39;dict&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">options</span> <span class="o">=</span> <span class="n">CodecOptions</span><span class="p">(</span><span class="n">document_class</span><span class="o">=</span><span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decoded_doc</span> <span class="o">=</span> <span class="n">bson</span><span class="o">.</span><span class="n">BSON</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">codec_options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">decoded_doc</span><span class="p">)</span>
+<span class="go">&lt;class &#39;collections.OrderedDict&#39;&gt;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>codec_options</cite> (optional): An instance of
+<a class="reference internal" href="codec_options.html#bson.codec_options.CodecOptions" title="bson.codec_options.CodecOptions"><code class="xref py py-class docutils literal"><span class="pre">CodecOptions</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.0: </span>Removed <cite>compile_re</cite> option: PyMongo now always represents BSON
+regular expressions as <a class="reference internal" href="regex.html#bson.regex.Regex" title="bson.regex.Regex"><code class="xref py py-class docutils literal"><span class="pre">Regex</span></code></a> objects. Use
+<a class="reference internal" href="regex.html#bson.regex.Regex.try_compile" title="bson.regex.Regex.try_compile"><code class="xref py py-meth docutils literal"><span class="pre">try_compile()</span></code></a> to attempt to convert from a
+BSON regular expression to a Python regular expression object.</p>
+<p>Replaced <cite>as_class</cite>, <cite>tz_aware</cite>, and <cite>uuid_subtype</cite> options with
+<cite>codec_options</cite>.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.7: </span>Added <cite>compile_re</cite> option. If set to False, PyMongo represented BSON
+regular expressions as <a class="reference internal" href="regex.html#bson.regex.Regex" title="bson.regex.Regex"><code class="xref py py-class docutils literal"><span class="pre">Regex</span></code></a> objects instead of
+attempting to compile BSON regular expressions as Python native
+regular expressions, thus preventing errors for some incompatible
+patterns, see <a class="reference external" href="https://jira.mongodb.org/browse/PYTHON-500">PYTHON-500</a>.</p>
+</div>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="bson.BSON.encode">
+<em class="property">classmethod </em><code class="descname">encode</code><span class="sig-paren">(</span><em>document</em>, <em>check_keys=False</em>, <em>codec_options=CodecOptions(document_class=dict</em>, <em>tz_aware=False</em>, <em>uuid_representation=PYTHON_LEGACY</em>, <em>unicode_decode_error_handler='strict'</em>, <em>tzinfo=None)</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.BSON.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode a document to a new <a class="reference internal" href="#bson.BSON" title="bson.BSON"><code class="xref py py-class docutils literal"><span class="pre">BSON</span></code></a> instance.</p>
+<p>A document can be any mapping type (like <code class="xref py py-class docutils literal"><span class="pre">dict</span></code>).</p>
+<p>Raises <code class="xref py py-class docutils literal"><span class="pre">TypeError</span></code> if <cite>document</cite> is not a mapping type,
+or contains keys that are not instances of
+<code class="xref py py-class docutils literal"><span class="pre">basestring</span></code> (<code class="xref py py-class docutils literal"><span class="pre">str</span></code> in python 3). Raises
+<a class="reference internal" href="errors.html#bson.errors.InvalidDocument" title="bson.errors.InvalidDocument"><code class="xref py py-class docutils literal"><span class="pre">InvalidDocument</span></code></a> if <cite>document</cite> cannot be
+converted to <a class="reference internal" href="#bson.BSON" title="bson.BSON"><code class="xref py py-class docutils literal"><span class="pre">BSON</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>document</cite>: mapping type representing a document</li>
+<li><cite>check_keys</cite> (optional): check if keys start with &#8216;$&#8217; or
+contain &#8216;.&#8217;, raising <a class="reference internal" href="errors.html#bson.errors.InvalidDocument" title="bson.errors.InvalidDocument"><code class="xref py py-class docutils literal"><span class="pre">InvalidDocument</span></code></a> in
+either case</li>
+<li><cite>codec_options</cite> (optional): An instance of
+<a class="reference internal" href="codec_options.html#bson.codec_options.CodecOptions" title="bson.codec_options.CodecOptions"><code class="xref py py-class docutils literal"><span class="pre">CodecOptions</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.0: </span>Replaced <cite>uuid_subtype</cite> option with <cite>codec_options</cite>.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="bson.decode_all">
+<code class="descclassname">bson.</code><code class="descname">decode_all</code><span class="sig-paren">(</span><em>data</em>, <em>codec_options=CodecOptions(document_class=dict</em>, <em>tz_aware=False</em>, <em>uuid_representation=PYTHON_LEGACY</em>, <em>unicode_decode_error_handler='strict'</em>, <em>tzinfo=None)</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.decode_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode BSON data to multiple documents.</p>
+<p><cite>data</cite> must be a string of concatenated, valid, BSON-encoded
+documents.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>data</cite>: BSON data</li>
+<li><cite>codec_options</cite> (optional): An instance of
+<a class="reference internal" href="codec_options.html#bson.codec_options.CodecOptions" title="bson.codec_options.CodecOptions"><code class="xref py py-class docutils literal"><span class="pre">CodecOptions</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.0: </span>Removed <cite>compile_re</cite> option: PyMongo now always represents BSON regular
+expressions as <a class="reference internal" href="regex.html#bson.regex.Regex" title="bson.regex.Regex"><code class="xref py py-class docutils literal"><span class="pre">Regex</span></code></a> objects. Use
+<a class="reference internal" href="regex.html#bson.regex.Regex.try_compile" title="bson.regex.Regex.try_compile"><code class="xref py py-meth docutils literal"><span class="pre">try_compile()</span></code></a> to attempt to convert from a
+BSON regular expression to a Python regular expression object.</p>
+<p>Replaced <cite>as_class</cite>, <cite>tz_aware</cite>, and <cite>uuid_subtype</cite> options with
+<cite>codec_options</cite>.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.7: </span>Added <cite>compile_re</cite> option. If set to False, PyMongo represented BSON
+regular expressions as <a class="reference internal" href="regex.html#bson.regex.Regex" title="bson.regex.Regex"><code class="xref py py-class docutils literal"><span class="pre">Regex</span></code></a> objects instead of
+attempting to compile BSON regular expressions as Python native
+regular expressions, thus preventing errors for some incompatible
+patterns, see <a class="reference external" href="https://jira.mongodb.org/browse/PYTHON-500">PYTHON-500</a>.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="bson.decode_file_iter">
+<code class="descclassname">bson.</code><code class="descname">decode_file_iter</code><span class="sig-paren">(</span><em>file_obj</em>, <em>codec_options=CodecOptions(document_class=dict</em>, <em>tz_aware=False</em>, <em>uuid_representation=PYTHON_LEGACY</em>, <em>unicode_decode_error_handler='strict'</em>, <em>tzinfo=None)</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.decode_file_iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode bson data from a file to multiple documents as a generator.</p>
+<p>Works similarly to the decode_all function, but reads from the file object
+in chunks and parses bson in chunks, yielding one document at a time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>file_obj</cite>: A file object containing BSON data.</li>
+<li><cite>codec_options</cite> (optional): An instance of
+<a class="reference internal" href="codec_options.html#bson.codec_options.CodecOptions" title="bson.codec_options.CodecOptions"><code class="xref py py-class docutils literal"><span class="pre">CodecOptions</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.0: </span>Replaced <cite>as_class</cite>, <cite>tz_aware</cite>, and <cite>uuid_subtype</cite> options with
+<cite>codec_options</cite>.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.8.</span></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="bson.decode_iter">
+<code class="descclassname">bson.</code><code class="descname">decode_iter</code><span class="sig-paren">(</span><em>data</em>, <em>codec_options=CodecOptions(document_class=dict</em>, <em>tz_aware=False</em>, <em>uuid_representation=PYTHON_LEGACY</em>, <em>unicode_decode_error_handler='strict'</em>, <em>tzinfo=None)</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.decode_iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode BSON data to multiple documents as a generator.</p>
+<p>Works similarly to the decode_all function, but yields one document at a
+time.</p>
+<p><cite>data</cite> must be a string of concatenated, valid, BSON-encoded
+documents.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>data</cite>: BSON data</li>
+<li><cite>codec_options</cite> (optional): An instance of
+<a class="reference internal" href="codec_options.html#bson.codec_options.CodecOptions" title="bson.codec_options.CodecOptions"><code class="xref py py-class docutils literal"><span class="pre">CodecOptions</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.0: </span>Replaced <cite>as_class</cite>, <cite>tz_aware</cite>, and <cite>uuid_subtype</cite> options with
+<cite>codec_options</cite>.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.8.</span></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="bson.gen_list_name">
+<code class="descclassname">bson.</code><code class="descname">gen_list_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bson.gen_list_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate &#8220;keys&#8221; for encoded lists in the sequence
+b&#8221;0&#8221;, b&#8221;1&#8221;, b&#8221;2&#8221;, ...</p>
+<p>The first 1000 keys are returned from a pre-built cache. All
+subsequent keys are generated on the fly.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bson.has_c">
+<code class="descclassname">bson.</code><code class="descname">has_c</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bson.has_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the C extension installed?</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bson.is_valid">
+<code class="descclassname">bson.</code><code class="descname">is_valid</code><span class="sig-paren">(</span><em>bson</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.is_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the given string represents valid <a class="reference internal" href="#bson.BSON" title="bson.BSON"><code class="xref py py-class docutils literal"><span class="pre">BSON</span></code></a> data.</p>
+<p>Raises <code class="xref py py-class docutils literal"><span class="pre">TypeError</span></code> if <cite>bson</cite> is not an instance of
+<code class="xref py py-class docutils literal"><span class="pre">str</span></code> (<code class="xref py py-class docutils literal"><span class="pre">bytes</span></code> in python 3). Returns <code class="docutils literal"><span class="pre">True</span></code>
+if <cite>bson</cite> is valid <a class="reference internal" href="#bson.BSON" title="bson.BSON"><code class="xref py py-class docutils literal"><span class="pre">BSON</span></code></a>, <code class="docutils literal"><span class="pre">False</span></code> otherwise.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>bson</cite>: the data to be validated</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Sub-modules:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="binary.html"><code class="docutils literal"><span class="pre">binary</span></code> &#8211; Tools for representing binary data to be stored in MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html"><code class="docutils literal"><span class="pre">code</span></code> &#8211; Tools for representing JavaScript code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codec_options.html"><code class="docutils literal"><span class="pre">codec_options</span></code> &#8211; Tools for specifying BSON codec options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbref.html"><code class="docutils literal"><span class="pre">dbref</span></code> &#8211; Tools for manipulating DBRefs (references to documents stored in MongoDB)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html"><code class="docutils literal"><span class="pre">errors</span></code> &#8211; Exceptions raised by the <code class="docutils literal"><span class="pre">bson</span></code> package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="int64.html"><code class="docutils literal"><span class="pre">int64</span></code> &#8211; Tools for representing BSON int64</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json_util.html"><code class="docutils literal"><span class="pre">json_util</span></code> &#8211; Tools for using Python&#8217;s <code class="docutils literal"><span class="pre">json</span></code> module with BSON documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="max_key.html"><code class="docutils literal"><span class="pre">max_key</span></code> &#8211; Representation for the MongoDB internal MaxKey type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="min_key.html"><code class="docutils literal"><span class="pre">min_key</span></code> &#8211; Representation for the MongoDB internal MinKey type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="objectid.html"><code class="docutils literal"><span class="pre">objectid</span></code> &#8211; Tools for working with MongoDB ObjectIds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="raw_bson.html"><code class="docutils literal"><span class="pre">raw_bson</span></code> &#8211; Tools for representing raw BSON documents.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html"><code class="docutils literal"><span class="pre">regex</span></code> &#8211; Tools for representing MongoDB regular expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="son.html"><code class="docutils literal"><span class="pre">son</span></code> &#8211; Tools for working with SON, an ordered mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timestamp.html"><code class="docutils literal"><span class="pre">timestamp</span></code> &#8211; Tools for representing MongoDB internal Timestamps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tz_util.html"><code class="docutils literal"><span class="pre">tz_util</span></code> &#8211; Utilities for dealing with timezones in Python</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">API Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="binary.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">binary</span></code> &#8211; Tools for representing binary data to be stored in MongoDB</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/bson/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="binary.html" title="binary – Tools for representing binary data to be stored in MongoDB"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="API Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

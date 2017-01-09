@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bulk – The bulk write operations interface &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="pymongo – Python driver for MongoDB" href="index.html" />
+    <link rel="next" title="errors – Exceptions raised by the pymongo package" href="errors.html" />
+    <link rel="prev" title="cursor – Tools for iterating over MongoDB query results" href="cursor.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="errors – Exceptions raised by the pymongo package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cursor.html" title="cursor – Tools for iterating over MongoDB query results"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pymongo.bulk">
+<span id="bulk-the-bulk-write-operations-interface"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">bulk</span></code> &#8211; The bulk write operations interface<a class="headerlink" href="#module-pymongo.bulk" title="Permalink to this headline">¶</a></h1>
+<p>The bulk write operations interface.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.7.</span></p>
+</div>
+<dl class="class">
+<dt id="pymongo.bulk.BulkOperationBuilder">
+<em class="property">class </em><code class="descclassname">pymongo.bulk.</code><code class="descname">BulkOperationBuilder</code><span class="sig-paren">(</span><em>collection</em>, <em>ordered=True</em>, <em>bypass_document_validation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkOperationBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a new BulkOperationBuilder instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>collection</cite>: A <a class="reference internal" href="collection.html#pymongo.collection.Collection" title="pymongo.collection.Collection"><code class="xref py py-class docutils literal"><span class="pre">Collection</span></code></a> instance.</li>
+<li><cite>ordered</cite> (optional): If <code class="docutils literal"><span class="pre">True</span></code> all operations will be executed
+serially, in the order provided, and the entire execution will
+abort on the first error. If <code class="docutils literal"><span class="pre">False</span></code> operations will be executed
+in arbitrary order (possibly in parallel on the server), reporting
+any errors that occurred after attempting all operations. Defaults
+to <code class="docutils literal"><span class="pre">True</span></code>.</li>
+<li><cite>bypass_document_validation</cite>: (optional) If <code class="docutils literal"><span class="pre">True</span></code>, allows the
+write to opt-out of document level validation. Default is
+<code class="docutils literal"><span class="pre">False</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><cite>bypass_document_validation</cite> requires server version
+<strong>&gt;= 3.2</strong></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.2: </span>Added bypass_document_validation support</p>
+</div>
+<dl class="method">
+<dt id="pymongo.bulk.BulkOperationBuilder.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>write_concern=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkOperationBuilder.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute all provided operations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li>write_concern (optional): the write concern for this bulk
+execution.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.bulk.BulkOperationBuilder.find">
+<code class="descname">find</code><span class="sig-paren">(</span><em>selector</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkOperationBuilder.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify selection criteria for bulk operations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><cite>selector</cite> (dict): the selection criteria for update
+and remove operations.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>A <a class="reference internal" href="#pymongo.bulk.BulkWriteOperation" title="pymongo.bulk.BulkWriteOperation"><code class="xref py py-class docutils literal"><span class="pre">BulkWriteOperation</span></code></a> instance, used to add
+update and remove operations to this bulk operation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.bulk.BulkOperationBuilder.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>document</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkOperationBuilder.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a single document.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>document</cite> (dict): the document to insert</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../../faq.html#writes-and-ids"><span class="std std-ref">Why does PyMongo add an _id field to all of my documents?</span></a></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pymongo.bulk.BulkUpsertOperation">
+<em class="property">class </em><code class="descclassname">pymongo.bulk.</code><code class="descname">BulkUpsertOperation</code><span class="sig-paren">(</span><em>selector</em>, <em>bulk</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkUpsertOperation" title="Permalink to this definition">¶</a></dt>
+<dd><p>An interface for adding upsert operations.</p>
+<dl class="method">
+<dt id="pymongo.bulk.BulkUpsertOperation.replace_one">
+<code class="descname">replace_one</code><span class="sig-paren">(</span><em>replacement</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkUpsertOperation.replace_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace one entire document matching the selector criteria.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>replacement</cite> (dict): the replacement document</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.bulk.BulkUpsertOperation.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>update</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkUpsertOperation.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update all documents matching the selector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>update</cite> (dict): the update operations to apply</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.bulk.BulkUpsertOperation.update_one">
+<code class="descname">update_one</code><span class="sig-paren">(</span><em>update</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkUpsertOperation.update_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update one document matching the selector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>update</cite> (dict): the update operations to apply</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pymongo.bulk.BulkWriteOperation">
+<em class="property">class </em><code class="descclassname">pymongo.bulk.</code><code class="descname">BulkWriteOperation</code><span class="sig-paren">(</span><em>selector</em>, <em>bulk</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkWriteOperation" title="Permalink to this definition">¶</a></dt>
+<dd><p>An interface for adding update or remove operations.</p>
+<dl class="method">
+<dt id="pymongo.bulk.BulkWriteOperation.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkWriteOperation.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all documents matching the selector criteria.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.bulk.BulkWriteOperation.remove_one">
+<code class="descname">remove_one</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkWriteOperation.remove_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a single document matching the selector criteria.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.bulk.BulkWriteOperation.replace_one">
+<code class="descname">replace_one</code><span class="sig-paren">(</span><em>replacement</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkWriteOperation.replace_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace one entire document matching the selector criteria.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>replacement</cite> (dict): the replacement document</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.bulk.BulkWriteOperation.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>update</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkWriteOperation.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update all documents matching the selector criteria.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>update</cite> (dict): the update operations to apply</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.bulk.BulkWriteOperation.update_one">
+<code class="descname">update_one</code><span class="sig-paren">(</span><em>update</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkWriteOperation.update_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update one document matching the selector criteria.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>update</cite> (dict): the update operations to apply</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.bulk.BulkWriteOperation.upsert">
+<code class="descname">upsert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.bulk.BulkWriteOperation.upsert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify that all chained update operations should be
+upserts.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>A <a class="reference internal" href="#pymongo.bulk.BulkUpsertOperation" title="pymongo.bulk.BulkUpsertOperation"><code class="xref py py-class docutils literal"><span class="pre">BulkUpsertOperation</span></code></a> instance, used to add
+update operations to this bulk operation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cursor.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">cursor</span></code> &#8211; Tools for iterating over MongoDB query results</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="errors.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">errors</span></code> &#8211; Exceptions raised by the <code class="docutils literal"><span class="pre">pymongo</span></code> package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/pymongo/bulk.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="errors – Exceptions raised by the pymongo package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cursor.html" title="cursor – Tools for iterating over MongoDB query results"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

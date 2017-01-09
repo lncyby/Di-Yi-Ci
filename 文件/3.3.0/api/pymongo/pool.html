@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pool – Pool module for use with a MongoDB client. &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="pymongo – Python driver for MongoDB" href="index.html" />
+    <link rel="next" title="read_concern – Tools for working with read concern." href="read_concern.html" />
+    <link rel="prev" title="operations – Operation class definitions" href="operations.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="read_concern.html" title="read_concern – Tools for working with read concern."
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="operations.html" title="operations – Operation class definitions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pymongo.pool">
+<span id="pool-pool-module-for-use-with-a-mongodb-client"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">pool</span></code> &#8211; Pool module for use with a MongoDB client.<a class="headerlink" href="#module-pymongo.pool" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pymongo.pool.SocketInfo">
+<em class="property">class </em><code class="descclassname">pymongo.pool.</code><code class="descname">SocketInfo</code><span class="sig-paren">(</span><em>sock</em>, <em>pool</em>, <em>ismaster</em>, <em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.pool.SocketInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store a socket with some metadata.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>sock</cite>: a raw socket object</li>
+<li><cite>pool</cite>: a Pool instance</li>
+<li><cite>ismaster</cite>: optional IsMaster instance, response to ismaster on <cite>sock</cite></li>
+<li><cite>address</cite>: the server&#8217;s (host, port)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pymongo.pool.SocketInfo.authenticate">
+<code class="descname">authenticate</code><span class="sig-paren">(</span><em>credentials</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.pool.SocketInfo.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log in to the server and store these credentials in <cite>authset</cite>.</p>
+<p>Can raise ConnectionFailure or OperationFailure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>credentials</cite>: A MongoCredential.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.pool.SocketInfo.check_auth">
+<code class="descname">check_auth</code><span class="sig-paren">(</span><em>all_credentials</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.pool.SocketInfo.check_auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update this socket&#8217;s authentication.</p>
+<p>Log in or out to bring this socket&#8217;s credentials up to date with
+those provided. Can raise ConnectionFailure or OperationFailure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>all_credentials</cite>: dict, maps auth source to MongoCredential.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.pool.SocketInfo.command">
+<code class="descname">command</code><span class="sig-paren">(</span><em>dbname</em>, <em>spec</em>, <em>slave_ok=False</em>, <em>read_preference=Primary()</em>, <em>codec_options=CodecOptions(document_class=dict</em>, <em>tz_aware=False</em>, <em>uuid_representation=PYTHON_LEGACY</em>, <em>unicode_decode_error_handler='strict'</em>, <em>tzinfo=None)</em>, <em>check=True</em>, <em>allowable_errors=None</em>, <em>check_keys=False</em>, <em>read_concern=ReadConcern()</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.pool.SocketInfo.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a command or raise ConnectionFailure or OperationFailure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>dbname</cite>: name of the database on which to run the command</li>
+<li><cite>spec</cite>: a command document as a dict, SON, or mapping object</li>
+<li><cite>slave_ok</cite>: whether to set the SlaveOkay wire protocol bit</li>
+<li><cite>read_preference</cite>: a read preference</li>
+<li><cite>codec_options</cite>: a CodecOptions instance</li>
+<li><cite>check</cite>: raise OperationFailure if there are errors</li>
+<li><cite>allowable_errors</cite>: errors to ignore if <cite>check</cite> is True</li>
+<li><cite>check_keys</cite>: if True, check <cite>spec</cite> for invalid keys</li>
+<li><cite>read_concern</cite>: The read concern for this command.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.pool.SocketInfo.legacy_write">
+<code class="descname">legacy_write</code><span class="sig-paren">(</span><em>request_id</em>, <em>msg</em>, <em>max_doc_size</em>, <em>with_last_error</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.pool.SocketInfo.legacy_write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send OP_INSERT, etc., optionally returning response as a dict.</p>
+<p>Can raise ConnectionFailure or OperationFailure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>request_id</cite>: an int.</li>
+<li><cite>msg</cite>: bytes, an OP_INSERT, OP_UPDATE, or OP_DELETE message,
+perhaps with a getlasterror command appended.</li>
+<li><cite>max_doc_size</cite>: size in bytes of the largest document in <cite>msg</cite>.</li>
+<li><cite>with_last_error</cite>: True if a getlasterror command is appended.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.pool.SocketInfo.receive_message">
+<code class="descname">receive_message</code><span class="sig-paren">(</span><em>operation</em>, <em>request_id</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.pool.SocketInfo.receive_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive a raw BSON message or raise ConnectionFailure.</p>
+<p>If any exception is raised, the socket is closed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.pool.SocketInfo.send_message">
+<code class="descname">send_message</code><span class="sig-paren">(</span><em>message</em>, <em>max_doc_size</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.pool.SocketInfo.send_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a raw BSON message or raise ConnectionFailure.</p>
+<p>If a network exception is raised, the socket is closed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymongo.pool.SocketInfo.write_command">
+<code class="descname">write_command</code><span class="sig-paren">(</span><em>request_id</em>, <em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.pool.SocketInfo.write_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send &#8220;insert&#8221; etc. command, returning response as a dict.</p>
+<p>Can raise ConnectionFailure or OperationFailure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>request_id</cite>: an int.</li>
+<li><cite>msg</cite>: bytes, the command message.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="operations.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">operations</span></code> &#8211; Operation class definitions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="read_concern.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">read_concern</span></code> &#8211; Tools for working with read concern.</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/pymongo/pool.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="read_concern.html" title="read_concern – Tools for working with read concern."
+             >next</a> |</li>
+        <li class="right" >
+          <a href="operations.html" title="operations – Operation class definitions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

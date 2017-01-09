@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>message – Tools for creating messages to be sent to MongoDB &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="pymongo – Python driver for MongoDB" href="index.html" />
+    <link rel="next" title="monitoring – Tools for monitoring driver events." href="monitoring.html" />
+    <link rel="prev" title="errors – Exceptions raised by the pymongo package" href="errors.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="monitoring.html" title="monitoring – Tools for monitoring driver events."
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="errors – Exceptions raised by the pymongo package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pymongo.message">
+<span id="message-tools-for-creating-messages-to-be-sent-to-mongodb"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">message</span></code> &#8211; Tools for creating messages to be sent to MongoDB<a class="headerlink" href="#module-pymongo.message" title="Permalink to this headline">¶</a></h1>
+<p>Tools for creating <a class="reference external" href="http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol">messages</a> to be sent to
+MongoDB.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This module is for internal use and is generally not needed by
+application developers.</p>
+</div>
+<dl class="function">
+<dt id="pymongo.message.delete">
+<code class="descclassname">pymongo.message.</code><code class="descname">delete</code><span class="sig-paren">(</span><em>collection_name</em>, <em>spec</em>, <em>safe</em>, <em>last_error_args</em>, <em>opts</em>, <em>flags=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.message.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a <strong>delete</strong> message.</p>
+<p><cite>opts</cite> is a CodecOptions. <cite>flags</cite> is a bit vector that may contain
+the SingleRemove flag or not:</p>
+<p><a class="reference external" href="http://docs.mongodb.org/meta-driver/latest/legacy/mongodb-wire-protocol/#op-delete">http://docs.mongodb.org/meta-driver/latest/legacy/mongodb-wire-protocol/#op-delete</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.message.get_more">
+<code class="descclassname">pymongo.message.</code><code class="descname">get_more</code><span class="sig-paren">(</span><em>collection_name</em>, <em>num_to_return</em>, <em>cursor_id</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.message.get_more" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a <strong>getMore</strong> message.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.message.insert">
+<code class="descclassname">pymongo.message.</code><code class="descname">insert</code><span class="sig-paren">(</span><em>collection_name</em>, <em>docs</em>, <em>check_keys</em>, <em>safe</em>, <em>last_error_args</em>, <em>continue_on_error</em>, <em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.message.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an <strong>insert</strong> message.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.message.kill_cursors">
+<code class="descclassname">pymongo.message.</code><code class="descname">kill_cursors</code><span class="sig-paren">(</span><em>cursor_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.message.kill_cursors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a <strong>killCursors</strong> message.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.message.query">
+<code class="descclassname">pymongo.message.</code><code class="descname">query</code><span class="sig-paren">(</span><em>options</em>, <em>collection_name</em>, <em>num_to_skip</em>, <em>num_to_return</em>, <em>query</em>, <em>field_selector</em>, <em>opts</em>, <em>check_keys=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.message.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a <strong>query</strong> message.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymongo.message.update">
+<code class="descclassname">pymongo.message.</code><code class="descname">update</code><span class="sig-paren">(</span><em>collection_name</em>, <em>upsert</em>, <em>multi</em>, <em>spec</em>, <em>doc</em>, <em>safe</em>, <em>last_error_args</em>, <em>check_keys</em>, <em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.message.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an <strong>update</strong> message.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="errors.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">errors</span></code> &#8211; Exceptions raised by the <code class="docutils literal"><span class="pre">pymongo</span></code> package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="monitoring.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">monitoring</span></code> &#8211; Tools for monitoring driver events.</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/pymongo/message.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="monitoring.html" title="monitoring – Tools for monitoring driver events."
+             >next</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="errors – Exceptions raised by the pymongo package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

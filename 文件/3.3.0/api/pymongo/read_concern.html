@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>read_concern – Tools for working with read concern. &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="pymongo – Python driver for MongoDB" href="index.html" />
+    <link rel="next" title="read_preferences – Utilities for choosing which member of a replica set to read from." href="read_preferences.html" />
+    <link rel="prev" title="pool – Pool module for use with a MongoDB client." href="pool.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="read_preferences.html" title="read_preferences – Utilities for choosing which member of a replica set to read from."
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pool.html" title="pool – Pool module for use with a MongoDB client."
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pymongo.read_concern">
+<span id="read-concern-tools-for-working-with-read-concern"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">read_concern</span></code> &#8211; Tools for working with read concern.<a class="headerlink" href="#module-pymongo.read_concern" title="Permalink to this headline">¶</a></h1>
+<p>Tools for working with read concerns.</p>
+<dl class="class">
+<dt id="pymongo.read_concern.ReadConcern">
+<em class="property">class </em><code class="descclassname">pymongo.read_concern.</code><code class="descname">ReadConcern</code><span class="sig-paren">(</span><em>level=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.read_concern.ReadConcern" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>level</cite>: (string) The read concern level specifies the level of
+isolation for read operations.  For example, a read operation using a
+read concern level of <code class="docutils literal"><span class="pre">majority</span></code> will only return data that has been
+written to a majority of nodes. If the level is left unspecified, the
+server default will be used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 3.2.</span></p>
+</div>
+<dl class="attribute">
+<dt id="pymongo.read_concern.ReadConcern.document">
+<code class="descname">document</code><a class="headerlink" href="#pymongo.read_concern.ReadConcern.document" title="Permalink to this definition">¶</a></dt>
+<dd><p>The document representation of this read concern.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="#pymongo.read_concern.ReadConcern" title="pymongo.read_concern.ReadConcern"><code class="xref py py-class docutils literal"><span class="pre">ReadConcern</span></code></a> is immutable. Mutating the value of
+<a class="reference internal" href="#pymongo.read_concern.ReadConcern.document" title="pymongo.read_concern.ReadConcern.document"><code class="xref py py-attr docutils literal"><span class="pre">document</span></code></a> does not mutate this <a class="reference internal" href="#pymongo.read_concern.ReadConcern" title="pymongo.read_concern.ReadConcern"><code class="xref py py-class docutils literal"><span class="pre">ReadConcern</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymongo.read_concern.ReadConcern.level">
+<code class="descname">level</code><a class="headerlink" href="#pymongo.read_concern.ReadConcern.level" title="Permalink to this definition">¶</a></dt>
+<dd><p>The read concern level.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymongo.read_concern.ReadConcern.ok_for_legacy">
+<code class="descname">ok_for_legacy</code><a class="headerlink" href="#pymongo.read_concern.ReadConcern.ok_for_legacy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if this read concern is compatible with
+old wire protocol versions.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pool.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">pool</span></code> &#8211; Pool module for use with a MongoDB client.</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="read_preferences.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">read_preferences</span></code> &#8211; Utilities for choosing which member of a replica set to read from.</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/pymongo/read_concern.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="read_preferences.html" title="read_preferences – Utilities for choosing which member of a replica set to read from."
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pool.html" title="pool – Pool module for use with a MongoDB client."
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

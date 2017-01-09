@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>binary – Tools for representing binary data to be stored in MongoDB &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="bson – BSON (Binary JSON) Encoding and Decoding" href="index.html" />
+    <link rel="next" title="code – Tools for representing JavaScript code" href="code.html" />
+    <link rel="prev" title="bson – BSON (Binary JSON) Encoding and Decoding" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code.html" title="code – Tools for representing JavaScript code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="bson – BSON (Binary JSON) Encoding and Decoding"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-bson.binary">
+<span id="binary-tools-for-representing-binary-data-to-be-stored-in-mongodb"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">binary</span></code> &#8211; Tools for representing binary data to be stored in MongoDB<a class="headerlink" href="#module-bson.binary" title="Permalink to this headline">¶</a></h1>
+<dl class="data">
+<dt id="bson.binary.BINARY_SUBTYPE">
+<code class="descclassname">bson.binary.</code><code class="descname">BINARY_SUBTYPE</code><em class="property"> = 0</em><a class="headerlink" href="#bson.binary.BINARY_SUBTYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>BSON binary subtype for binary data.</p>
+<p>This is the default subtype for binary data.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.FUNCTION_SUBTYPE">
+<code class="descclassname">bson.binary.</code><code class="descname">FUNCTION_SUBTYPE</code><em class="property"> = 1</em><a class="headerlink" href="#bson.binary.FUNCTION_SUBTYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>BSON binary subtype for functions.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.OLD_BINARY_SUBTYPE">
+<code class="descclassname">bson.binary.</code><code class="descname">OLD_BINARY_SUBTYPE</code><em class="property"> = 2</em><a class="headerlink" href="#bson.binary.OLD_BINARY_SUBTYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Old BSON binary subtype for binary data.</p>
+<p>This is the old default subtype, the current
+default is <a class="reference internal" href="#bson.binary.BINARY_SUBTYPE" title="bson.binary.BINARY_SUBTYPE"><code class="xref py py-data docutils literal"><span class="pre">BINARY_SUBTYPE</span></code></a>.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.OLD_UUID_SUBTYPE">
+<code class="descclassname">bson.binary.</code><code class="descname">OLD_UUID_SUBTYPE</code><em class="property"> = 3</em><a class="headerlink" href="#bson.binary.OLD_UUID_SUBTYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Old BSON binary subtype for a UUID.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">uuid.UUID</span></code> instances will automatically be encoded
+by <a class="reference internal" href="index.html#module-bson" title="bson: BSON (Binary JSON) Encoding and Decoding"><code class="xref py py-mod docutils literal"><span class="pre">bson</span></code></a> using this subtype.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.UUID_SUBTYPE">
+<code class="descclassname">bson.binary.</code><code class="descname">UUID_SUBTYPE</code><em class="property"> = 4</em><a class="headerlink" href="#bson.binary.UUID_SUBTYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>BSON binary subtype for a UUID.</p>
+<p>This is the new BSON binary subtype for UUIDs. The
+current default is <a class="reference internal" href="#bson.binary.OLD_UUID_SUBTYPE" title="bson.binary.OLD_UUID_SUBTYPE"><code class="xref py py-data docutils literal"><span class="pre">OLD_UUID_SUBTYPE</span></code></a> but will
+change to this in a future release.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span>Changed to subtype 4.</p>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.STANDARD">
+<code class="descclassname">bson.binary.</code><code class="descname">STANDARD</code><em class="property"> = 4</em><a class="headerlink" href="#bson.binary.STANDARD" title="Permalink to this definition">¶</a></dt>
+<dd><p>The standard UUID representation.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">uuid.UUID</span></code> instances will automatically be encoded to
+and decoded from BSON binary, using RFC-4122 byte order with
+binary subtype <a class="reference internal" href="#bson.binary.UUID_SUBTYPE" title="bson.binary.UUID_SUBTYPE"><code class="xref py py-data docutils literal"><span class="pre">UUID_SUBTYPE</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 3.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.PYTHON_LEGACY">
+<code class="descclassname">bson.binary.</code><code class="descname">PYTHON_LEGACY</code><em class="property"> = 3</em><a class="headerlink" href="#bson.binary.PYTHON_LEGACY" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Python legacy UUID representation.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">uuid.UUID</span></code> instances will automatically be encoded to
+and decoded from BSON binary, using RFC-4122 byte order with
+binary subtype <a class="reference internal" href="#bson.binary.OLD_UUID_SUBTYPE" title="bson.binary.OLD_UUID_SUBTYPE"><code class="xref py py-data docutils literal"><span class="pre">OLD_UUID_SUBTYPE</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 3.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.JAVA_LEGACY">
+<code class="descclassname">bson.binary.</code><code class="descname">JAVA_LEGACY</code><em class="property"> = 5</em><a class="headerlink" href="#bson.binary.JAVA_LEGACY" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Java legacy UUID representation.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">uuid.UUID</span></code> instances will automatically be encoded to
+and decoded from BSON binary, using the Java driver&#8217;s legacy
+byte order with binary subtype <a class="reference internal" href="#bson.binary.OLD_UUID_SUBTYPE" title="bson.binary.OLD_UUID_SUBTYPE"><code class="xref py py-data docutils literal"><span class="pre">OLD_UUID_SUBTYPE</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.3.</span></p>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.CSHARP_LEGACY">
+<code class="descclassname">bson.binary.</code><code class="descname">CSHARP_LEGACY</code><em class="property"> = 6</em><a class="headerlink" href="#bson.binary.CSHARP_LEGACY" title="Permalink to this definition">¶</a></dt>
+<dd><p>The C#/.net legacy UUID representation.</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">uuid.UUID</span></code> instances will automatically be encoded to
+and decoded from BSON binary, using the C# driver&#8217;s legacy
+byte order and binary subtype <a class="reference internal" href="#bson.binary.OLD_UUID_SUBTYPE" title="bson.binary.OLD_UUID_SUBTYPE"><code class="xref py py-data docutils literal"><span class="pre">OLD_UUID_SUBTYPE</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.3.</span></p>
+</div>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.MD5_SUBTYPE">
+<code class="descclassname">bson.binary.</code><code class="descname">MD5_SUBTYPE</code><em class="property"> = 5</em><a class="headerlink" href="#bson.binary.MD5_SUBTYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>BSON binary subtype for an MD5 hash.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="bson.binary.USER_DEFINED_SUBTYPE">
+<code class="descclassname">bson.binary.</code><code class="descname">USER_DEFINED_SUBTYPE</code><em class="property"> = 128</em><a class="headerlink" href="#bson.binary.USER_DEFINED_SUBTYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>BSON binary subtype for any user defined structure.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="bson.binary.Binary">
+<em class="property">class </em><code class="descclassname">bson.binary.</code><code class="descname">Binary</code><span class="sig-paren">(</span><em>data</em>, <em>subtype=BINARY_SUBTYPE</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.binary.Binary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">str</span></code></p>
+<p>Representation of BSON binary data.</p>
+<p>This is necessary because we want to represent Python strings as
+the BSON string type. We need to wrap binary data so we can tell
+the difference between what should be considered binary data and
+what should be considered a string when we encode to BSON.</p>
+<p>Raises TypeError if <cite>data</cite> is not an instance of <code class="xref py py-class docutils literal"><span class="pre">str</span></code>
+(<code class="xref py py-class docutils literal"><span class="pre">bytes</span></code> in python 3) or <cite>subtype</cite> is not an instance of
+<code class="xref py py-class docutils literal"><span class="pre">int</span></code>. Raises ValueError if <cite>subtype</cite> is not in [0, 256).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In python 3 instances of Binary with subtype 0 will be decoded
+directly to <code class="xref py py-class docutils literal"><span class="pre">bytes</span></code>.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>data</cite>: the binary data to represent</li>
+<li><cite>subtype</cite> (optional): the <a class="reference external" href="http://bsonspec.org/#/specification">binary subtype</a>
+to use</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="bson.binary.Binary.subtype">
+<code class="descname">subtype</code><a class="headerlink" href="#bson.binary.Binary.subtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subtype of this binary data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bson.binary.UUIDLegacy">
+<em class="property">class </em><code class="descclassname">bson.binary.</code><code class="descname">UUIDLegacy</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.binary.UUIDLegacy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#bson.binary.Binary" title="bson.binary.Binary"><code class="xref py py-class docutils literal"><span class="pre">bson.binary.Binary</span></code></a></p>
+<p>UUID wrapper to support working with UUIDs stored as PYTHON_LEGACY.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bson.binary</span> <span class="k">import</span> <span class="n">Binary</span><span class="p">,</span> <span class="n">UUIDLegacy</span><span class="p">,</span> <span class="n">STANDARD</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bson.codec_options</span> <span class="k">import</span> <span class="n">CodecOptions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_uuid</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coll</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">CodecOptions</span><span class="p">(</span><span class="n">uuid_representation</span><span class="o">=</span><span class="n">STANDARD</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coll</span><span class="o">.</span><span class="n">insert_one</span><span class="p">({</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">Binary</span><span class="p">(</span><span class="n">my_uuid</span><span class="o">.</span><span class="n">bytes</span><span class="p">,</span> <span class="mi">3</span><span class="p">)})</span><span class="o">.</span><span class="n">inserted_id</span>
+<span class="go">ObjectId(&#39;...&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coll</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">my_uuid</span><span class="p">})</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coll</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDLegacy</span><span class="p">(</span><span class="n">my_uuid</span><span class="p">)})</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coll</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDLegacy</span><span class="p">(</span><span class="n">my_uuid</span><span class="p">)})[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+<span class="go">UUID(&#39;...&#39;)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Convert from subtype 3 to subtype 4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span> <span class="o">=</span> <span class="n">coll</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDLegacy</span><span class="p">(</span><span class="n">my_uuid</span><span class="p">)})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coll</span><span class="o">.</span><span class="n">replace_one</span><span class="p">({</span><span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]},</span> <span class="n">doc</span><span class="p">)</span><span class="o">.</span><span class="n">matched_count</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coll</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">UUIDLegacy</span><span class="p">(</span><span class="n">my_uuid</span><span class="p">)})</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coll</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;$in&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">UUIDLegacy</span><span class="p">(</span><span class="n">my_uuid</span><span class="p">),</span> <span class="n">my_uuid</span><span class="p">]}})</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coll</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s1">&#39;uuid&#39;</span><span class="p">:</span> <span class="n">my_uuid</span><span class="p">})[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+<span class="go">UUID(&#39;...&#39;)</span>
+</pre></div>
+</div>
+<p>Raises TypeError if <cite>obj</cite> is not an instance of <code class="xref py py-class docutils literal"><span class="pre">UUID</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>obj</cite>: An instance of <code class="xref py py-class docutils literal"><span class="pre">UUID</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="bson.binary.UUIDLegacy.uuid">
+<code class="descname">uuid</code><a class="headerlink" href="#bson.binary.UUIDLegacy.uuid" title="Permalink to this definition">¶</a></dt>
+<dd><p>UUID instance wrapped by this UUIDLegacy instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="code.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">code</span></code> &#8211; Tools for representing JavaScript code</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/bson/binary.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code.html" title="code – Tools for representing JavaScript code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="bson – BSON (Binary JSON) Encoding and Decoding"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

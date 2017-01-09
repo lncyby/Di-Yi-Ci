@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>son – Tools for working with SON, an ordered mapping &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="bson – BSON (Binary JSON) Encoding and Decoding" href="index.html" />
+    <link rel="next" title="timestamp – Tools for representing MongoDB internal Timestamps" href="timestamp.html" />
+    <link rel="prev" title="regex – Tools for representing MongoDB regular expressions" href="regex.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="timestamp.html" title="timestamp – Tools for representing MongoDB internal Timestamps"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="regex.html" title="regex – Tools for representing MongoDB regular expressions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-bson.son">
+<span id="son-tools-for-working-with-son-an-ordered-mapping"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">son</span></code> &#8211; Tools for working with SON, an ordered mapping<a class="headerlink" href="#module-bson.son" title="Permalink to this headline">¶</a></h1>
+<p>Tools for creating and manipulating SON, the Serialized Ocument Notation.</p>
+<p>Regular dictionaries can be used instead of SON objects, but not when the order
+of keys is important. A SON object can be used just like a normal Python
+dictionary.</p>
+<dl class="class">
+<dt id="bson.son.SON">
+<em class="property">class </em><code class="descclassname">bson.son.</code><code class="descname">SON</code><span class="sig-paren">(</span><em>data=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.son.SON" title="Permalink to this definition">¶</a></dt>
+<dd><p>SON data.</p>
+<p>A subclass of dict that maintains ordering of keys and provides a
+few extra niceties for dealing with SON. SON objects can be
+converted to and from BSON.</p>
+<p>The mapping from Python types to BSON types is as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="18%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Python Type</th>
+<th class="head">BSON Type</th>
+<th class="head">Supported Direction</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>None</td>
+<td>null</td>
+<td>both</td>
+</tr>
+<tr class="row-odd"><td>bool</td>
+<td>boolean</td>
+<td>both</td>
+</tr>
+<tr class="row-even"><td>int <a class="footnote-reference" href="#int" id="id1">[1]</a></td>
+<td>int32 / int64</td>
+<td>py -&gt; bson</td>
+</tr>
+<tr class="row-odd"><td>long</td>
+<td>int64</td>
+<td>py -&gt; bson</td>
+</tr>
+<tr class="row-even"><td><cite>bson.int64.Int64</cite></td>
+<td>int64</td>
+<td>both</td>
+</tr>
+<tr class="row-odd"><td>float</td>
+<td>number (real)</td>
+<td>both</td>
+</tr>
+<tr class="row-even"><td>string</td>
+<td>string</td>
+<td>py -&gt; bson</td>
+</tr>
+<tr class="row-odd"><td>unicode</td>
+<td>string</td>
+<td>both</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>array</td>
+<td>both</td>
+</tr>
+<tr class="row-odd"><td>dict / <cite>SON</cite></td>
+<td>object</td>
+<td>both</td>
+</tr>
+<tr class="row-even"><td>datetime.datetime <a class="footnote-reference" href="#dt" id="id2">[2]</a> <a class="footnote-reference" href="#dt2" id="id3">[3]</a></td>
+<td>date</td>
+<td>both</td>
+</tr>
+<tr class="row-odd"><td><cite>bson.regex.Regex</cite></td>
+<td>regex</td>
+<td>both</td>
+</tr>
+<tr class="row-even"><td>compiled re <a class="footnote-reference" href="#re" id="id4">[4]</a></td>
+<td>regex</td>
+<td>py -&gt; bson</td>
+</tr>
+<tr class="row-odd"><td><cite>bson.binary.Binary</cite></td>
+<td>binary</td>
+<td>both</td>
+</tr>
+<tr class="row-even"><td><cite>bson.objectid.ObjectId</cite></td>
+<td>oid</td>
+<td>both</td>
+</tr>
+<tr class="row-odd"><td><cite>bson.dbref.DBRef</cite></td>
+<td>dbref</td>
+<td>both</td>
+</tr>
+<tr class="row-even"><td>None</td>
+<td>undefined</td>
+<td>bson -&gt; py</td>
+</tr>
+<tr class="row-odd"><td>unicode</td>
+<td>code</td>
+<td>bson -&gt; py</td>
+</tr>
+<tr class="row-even"><td><cite>bson.code.Code</cite></td>
+<td>code</td>
+<td>py -&gt; bson</td>
+</tr>
+<tr class="row-odd"><td>unicode</td>
+<td>symbol</td>
+<td>bson -&gt; py</td>
+</tr>
+<tr class="row-even"><td>bytes (Python 3) <a class="footnote-reference" href="#bytes" id="id5">[5]</a></td>
+<td>binary</td>
+<td>both</td>
+</tr>
+</tbody>
+</table>
+<p>Note that to save binary data it must be wrapped as an instance of
+<cite>bson.binary.Binary</cite>. Otherwise it will be saved as a BSON string
+and retrieved as unicode.</p>
+<table class="docutils footnote" frame="void" id="int" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>A Python int will be saved as a BSON int32 or BSON int64 depending
+on its size. A BSON int32 will always decode to a Python int. A BSON
+int64 will always decode to a <a class="reference internal" href="int64.html#bson.int64.Int64" title="bson.int64.Int64"><code class="xref py py-class docutils literal"><span class="pre">Int64</span></code></a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="dt" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>datetime.datetime instances will be rounded to the nearest
+millisecond when saved</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="dt2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>all datetime.datetime instances are treated as <em>naive</em>. clients
+should always use UTC.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="re" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td><a class="reference internal" href="regex.html#bson.regex.Regex" title="bson.regex.Regex"><code class="xref py py-class docutils literal"><span class="pre">Regex</span></code></a> instances and regular expression
+objects from <code class="docutils literal"><span class="pre">re.compile()</span></code> are both saved as BSON regular expressions.
+BSON regular expressions are decoded as <a class="reference internal" href="regex.html#bson.regex.Regex" title="bson.regex.Regex"><code class="xref py py-class docutils literal"><span class="pre">Regex</span></code></a>
+instances.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="bytes" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>The bytes type from Python 3.x is encoded as BSON binary with
+subtype 0. In Python 3.x it will be decoded back to bytes. In Python 2.x
+it will be decoded to an instance of <a class="reference internal" href="binary.html#bson.binary.Binary" title="bson.binary.Binary"><code class="xref py py-class docutils literal"><span class="pre">Binary</span></code></a> with
+subtype 0.</td></tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="bson.son.SON.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bson.son.SON.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a SON document to a normal Python dictionary instance.</p>
+<p>This is trickier than just <em>dict(...)</em> because it needs to be
+recursive.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="regex.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">regex</span></code> &#8211; Tools for representing MongoDB regular expressions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="timestamp.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">timestamp</span></code> &#8211; Tools for representing MongoDB internal Timestamps</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/bson/son.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="timestamp.html" title="timestamp – Tools for representing MongoDB internal Timestamps"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="regex.html" title="regex – Tools for representing MongoDB regular expressions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

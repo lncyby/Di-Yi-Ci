@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cursor_manager – Managers to handle when cursors are killed after being closed &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="pymongo – Python driver for MongoDB" href="index.html" />
+    <link rel="next" title="uri_parser – Tools to parse and validate a MongoDB URI" href="uri_parser.html" />
+    <link rel="prev" title="son_manipulator – Manipulators that can edit SON documents as they are saved or retrieved" href="son_manipulator.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="uri_parser.html" title="uri_parser – Tools to parse and validate a MongoDB URI"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="son_manipulator.html" title="son_manipulator – Manipulators that can edit SON documents as they are saved or retrieved"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pymongo.cursor_manager">
+<span id="cursor-manager-managers-to-handle-when-cursors-are-killed-after-being-closed"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">cursor_manager</span></code> &#8211; Managers to handle when cursors are killed after being closed<a class="headerlink" href="#module-pymongo.cursor_manager" title="Permalink to this headline">¶</a></h1>
+<p>DEPRECATED - A manager to handle when cursors are killed after they are
+closed.</p>
+<p>New cursor managers should be defined as subclasses of CursorManager and can be
+installed on a client by calling
+<a class="reference internal" href="mongo_client.html#pymongo.mongo_client.MongoClient.set_cursor_manager" title="pymongo.mongo_client.MongoClient.set_cursor_manager"><code class="xref py py-meth docutils literal"><span class="pre">set_cursor_manager()</span></code></a>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.3: </span>Deprecated, for real this time.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.0: </span>Undeprecated. <a class="reference internal" href="#pymongo.cursor_manager.CursorManager.close" title="pymongo.cursor_manager.CursorManager.close"><code class="xref py py-meth docutils literal"><span class="pre">close()</span></code></a> now
+requires an <cite>address</cite> argument. The <code class="docutils literal"><span class="pre">BatchCursorManager</span></code> class is removed.</p>
+</div>
+<dl class="class">
+<dt id="pymongo.cursor_manager.CursorManager">
+<em class="property">class </em><code class="descclassname">pymongo.cursor_manager.</code><code class="descname">CursorManager</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.cursor_manager.CursorManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiate the manager.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>client</cite>: a MongoClient</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pymongo.cursor_manager.CursorManager.close">
+<code class="descname">close</code><span class="sig-paren">(</span><em>cursor_id</em>, <em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.cursor_manager.CursorManager.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kill a cursor.</p>
+<p>Raises TypeError if cursor_id is not an instance of (int, long).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>cursor_id</cite>: cursor id to close</li>
+<li><cite>address</cite>: the cursor&#8217;s server&#8217;s (host, port) pair</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.0: </span>Now requires an <cite>address</cite> argument.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="son_manipulator.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">son_manipulator</span></code> &#8211; Manipulators that can edit SON documents as they are saved or retrieved</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="uri_parser.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">uri_parser</span></code> &#8211; Tools to parse and validate a MongoDB URI</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/pymongo/cursor_manager.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="uri_parser.html" title="uri_parser – Tools to parse and validate a MongoDB URI"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="son_manipulator.html" title="son_manipulator – Manipulators that can edit SON documents as they are saved or retrieved"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

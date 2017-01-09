@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>write_concern – Tools for specifying write concern &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="pymongo – Python driver for MongoDB" href="index.html" />
+    <link rel="next" title="gridfs – Tools for working with GridFS" href="../gridfs/index.html" />
+    <link rel="prev" title="uri_parser – Tools to parse and validate a MongoDB URI" href="uri_parser.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../gridfs/index.html" title="gridfs – Tools for working with GridFS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="uri_parser.html" title="uri_parser – Tools to parse and validate a MongoDB URI"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pymongo.write_concern">
+<span id="write-concern-tools-for-specifying-write-concern"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">write_concern</span></code> &#8211; Tools for specifying write concern<a class="headerlink" href="#module-pymongo.write_concern" title="Permalink to this headline">¶</a></h1>
+<p>Tools for working with write concerns.</p>
+<dl class="class">
+<dt id="pymongo.write_concern.WriteConcern">
+<em class="property">class </em><code class="descclassname">pymongo.write_concern.</code><code class="descname">WriteConcern</code><span class="sig-paren">(</span><em>w=None</em>, <em>wtimeout=None</em>, <em>j=None</em>, <em>fsync=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pymongo.write_concern.WriteConcern" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><cite>w</cite>: (integer or string) Used with replication, write operations
+will block until they have been replicated to the specified number
+or tagged set of servers. <cite>w=&lt;integer&gt;</cite> always includes the replica
+set primary (e.g. w=3 means write to the primary and wait until
+replicated to <strong>two</strong> secondaries). <strong>w=0 disables acknowledgement
+of write operations and can not be used with other write concern
+options.</strong></li>
+<li><cite>wtimeout</cite>: (integer) Used in conjunction with <cite>w</cite>. Specify a value
+in milliseconds to control how long to wait for write propagation
+to complete. If replication does not complete in the given
+timeframe, a timeout exception is raised.</li>
+<li><cite>j</cite>: If <code class="docutils literal"><span class="pre">True</span></code> block until write operations have been committed
+to the journal. Cannot be used in combination with <cite>fsync</cite>. Prior
+to MongoDB 2.6 this option was ignored if the server was running
+without journaling. Starting with MongoDB 2.6 write operations will
+fail with an exception if this option is used when the server is
+running without journaling.</li>
+<li><cite>fsync</cite>: If <code class="docutils literal"><span class="pre">True</span></code> and the server is running without journaling,
+blocks until the server has synced all data files to disk. If the
+server is running with journaling, this acts the same as the <cite>j</cite>
+option, blocking until write operations have been committed to the
+journal. Cannot be used in combination with <cite>j</cite>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="pymongo.write_concern.WriteConcern.acknowledged">
+<code class="descname">acknowledged</code><a class="headerlink" href="#pymongo.write_concern.WriteConcern.acknowledged" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <code class="docutils literal"><span class="pre">True</span></code> write operations will wait for acknowledgement before
+returning.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymongo.write_concern.WriteConcern.document">
+<code class="descname">document</code><a class="headerlink" href="#pymongo.write_concern.WriteConcern.document" title="Permalink to this definition">¶</a></dt>
+<dd><p>The document representation of this write concern.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="#pymongo.write_concern.WriteConcern" title="pymongo.write_concern.WriteConcern"><code class="xref py py-class docutils literal"><span class="pre">WriteConcern</span></code></a> is immutable. Mutating the value of
+<a class="reference internal" href="#pymongo.write_concern.WriteConcern.document" title="pymongo.write_concern.WriteConcern.document"><code class="xref py py-attr docutils literal"><span class="pre">document</span></code></a> does not mutate this <a class="reference internal" href="#pymongo.write_concern.WriteConcern" title="pymongo.write_concern.WriteConcern"><code class="xref py py-class docutils literal"><span class="pre">WriteConcern</span></code></a>.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="uri_parser.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">uri_parser</span></code> &#8211; Tools to parse and validate a MongoDB URI</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../gridfs/index.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">gridfs</span></code> &#8211; Tools for working with GridFS</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/pymongo/write_concern.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../gridfs/index.html" title="gridfs – Tools for working with GridFS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="uri_parser.html" title="uri_parser – Tools to parse and validate a MongoDB URI"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">pymongo</span></code> &#8211; Python driver for MongoDB</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>errors – Exceptions raised by the bson package &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="bson – BSON (Binary JSON) Encoding and Decoding" href="index.html" />
+    <link rel="next" title="int64 – Tools for representing BSON int64" href="int64.html" />
+    <link rel="prev" title="dbref – Tools for manipulating DBRefs (references to documents stored in MongoDB)" href="dbref.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="int64.html" title="int64 – Tools for representing BSON int64"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dbref.html" title="dbref – Tools for manipulating DBRefs (references to documents stored in MongoDB)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-bson.errors">
+<span id="errors-exceptions-raised-by-the-bson-package"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">errors</span></code> &#8211; Exceptions raised by the <a class="reference internal" href="index.html#module-bson" title="bson: BSON (Binary JSON) Encoding and Decoding"><code class="xref py py-mod docutils literal"><span class="pre">bson</span></code></a> package<a class="headerlink" href="#module-bson.errors" title="Permalink to this headline">¶</a></h1>
+<p>Exceptions raised by the BSON package.</p>
+<dl class="exception">
+<dt id="bson.errors.BSONError">
+<em class="property">exception </em><code class="descclassname">bson.errors.</code><code class="descname">BSONError</code><a class="headerlink" href="#bson.errors.BSONError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for all BSON exceptions.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="bson.errors.InvalidBSON">
+<em class="property">exception </em><code class="descclassname">bson.errors.</code><code class="descname">InvalidBSON</code><a class="headerlink" href="#bson.errors.InvalidBSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when trying to create a BSON object from invalid data.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="bson.errors.InvalidDocument">
+<em class="property">exception </em><code class="descclassname">bson.errors.</code><code class="descname">InvalidDocument</code><a class="headerlink" href="#bson.errors.InvalidDocument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when trying to create a BSON object from an invalid document.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="bson.errors.InvalidId">
+<em class="property">exception </em><code class="descclassname">bson.errors.</code><code class="descname">InvalidId</code><a class="headerlink" href="#bson.errors.InvalidId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when trying to create an ObjectId from invalid data.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="bson.errors.InvalidStringData">
+<em class="property">exception </em><code class="descclassname">bson.errors.</code><code class="descname">InvalidStringData</code><a class="headerlink" href="#bson.errors.InvalidStringData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when trying to encode a string containing non-UTF8 data.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dbref.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">dbref</span></code> &#8211; Tools for manipulating DBRefs (references to documents stored in MongoDB)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="int64.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">int64</span></code> &#8211; Tools for representing BSON int64</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/bson/errors.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="int64.html" title="int64 – Tools for representing BSON int64"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dbref.html" title="dbref – Tools for manipulating DBRefs (references to documents stored in MongoDB)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>json_util – Tools for using Python’s json module with BSON documents &#8212; PyMongo 3.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="PyMongo 3.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="bson – BSON (Binary JSON) Encoding and Decoding" href="index.html" />
+    <link rel="next" title="max_key – Representation for the MongoDB internal MaxKey type" href="max_key.html" />
+    <link rel="prev" title="int64 – Tools for representing BSON int64" href="int64.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="max_key.html" title="max_key – Representation for the MongoDB internal MaxKey type"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="int64.html" title="int64 – Tools for representing BSON int64"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-bson.json_util">
+<span id="json-util-tools-for-using-python-s-json-module-with-bson-documents"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">json_util</span></code> &#8211; Tools for using Python&#8217;s <code class="xref py py-mod docutils literal"><span class="pre">json</span></code> module with BSON documents<a class="headerlink" href="#module-bson.json_util" title="Permalink to this headline">¶</a></h1>
+<p>Tools for using Python&#8217;s <code class="xref py py-mod docutils literal"><span class="pre">json</span></code> module with BSON documents.</p>
+<p>This module provides two helper methods <cite>dumps</cite> and <cite>loads</cite> that wrap the
+native <code class="xref py py-mod docutils literal"><span class="pre">json</span></code> methods and provide explicit BSON conversion to and from
+json.  This allows for specialized encoding and decoding of BSON documents
+into <a class="reference external" href="http://www.mongodb.org/display/DOCS/Mongo+Extended+JSON">Mongo Extended JSON</a>&#8216;s <em>Strict</em>
+mode.  This lets you encode / decode BSON documents to JSON even when
+they use special BSON types.</p>
+<p>Example usage (serialization):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bson</span> <span class="k">import</span> <span class="n">Binary</span><span class="p">,</span> <span class="n">Code</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bson.json_util</span> <span class="k">import</span> <span class="n">dumps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dumps</span><span class="p">([{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]},</span>
+<span class="gp">... </span>       <span class="p">{</span><span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">}},</span>
+<span class="gp">... </span>       <span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="n">Code</span><span class="p">(</span><span class="s2">&quot;function x() { return 1; }&quot;</span><span class="p">)},</span>
+<span class="gp">... </span>       <span class="p">{</span><span class="s1">&#39;bin&#39;</span><span class="p">:</span> <span class="n">Binary</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)}])</span>
+<span class="go">&#39;[{&quot;foo&quot;: [1, 2]}, {&quot;bar&quot;: {&quot;hello&quot;: &quot;world&quot;}}, {&quot;code&quot;: {&quot;$code&quot;: &quot;function x() { return 1; }&quot;, &quot;$scope&quot;: {}}}, {&quot;bin&quot;: {&quot;$binary&quot;: &quot;AQIDBA==&quot;, &quot;$type&quot;: &quot;00&quot;}}]&#39;</span>
+</pre></div>
+</div>
+<p>Example usage (deserialization):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bson.json_util</span> <span class="k">import</span> <span class="n">loads</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loads</span><span class="p">(</span><span class="s1">&#39;[{&quot;foo&quot;: [1, 2]}, {&quot;bar&quot;: {&quot;hello&quot;: &quot;world&quot;}}, {&quot;code&quot;: {&quot;$scope&quot;: </span><span class="si">{}</span><span class="s1">, &quot;$code&quot;: &quot;function x() { return 1; }&quot;}}, {&quot;bin&quot;: {&quot;$type&quot;: &quot;00&quot;, &quot;$binary&quot;: &quot;AQIDBA==&quot;}}]&#39;</span><span class="p">)</span>
+<span class="go">[{u&#39;foo&#39;: [1, 2]}, {u&#39;bar&#39;: {u&#39;hello&#39;: u&#39;world&#39;}}, {u&#39;code&#39;: Code(&#39;function x() { return 1; }&#39;, {})}, {u&#39;bin&#39;: Binary(&#39;...&#39;, 0)}]</span>
+</pre></div>
+</div>
+<p>Alternatively, you can manually pass the <cite>default</cite> to <code class="xref py py-func docutils literal"><span class="pre">json.dumps()</span></code>.
+It won&#8217;t handle <a class="reference internal" href="binary.html#bson.binary.Binary" title="bson.binary.Binary"><code class="xref py py-class docutils literal"><span class="pre">Binary</span></code></a> and <a class="reference internal" href="code.html#bson.code.Code" title="bson.code.Code"><code class="xref py py-class docutils literal"><span class="pre">Code</span></code></a>
+instances (as they are extended strings you can&#8217;t provide custom defaults),
+but it will be faster as there is less recursion.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.8: </span>The output format for <a class="reference internal" href="timestamp.html#bson.timestamp.Timestamp" title="bson.timestamp.Timestamp"><code class="xref py py-class docutils literal"><span class="pre">Timestamp</span></code></a> has changed from
+&#8216;{&#8220;t&#8221;: &lt;int&gt;, &#8220;i&#8221;: &lt;int&gt;}&#8217; to &#8216;{&#8220;$timestamp&#8221;: {&#8220;t&#8221;: &lt;int&gt;, &#8220;i&#8221;: &lt;int&gt;}}&#8217;.
+This new format will be decoded to an instance of
+<a class="reference internal" href="timestamp.html#bson.timestamp.Timestamp" title="bson.timestamp.Timestamp"><code class="xref py py-class docutils literal"><span class="pre">Timestamp</span></code></a>. The old format will continue to be
+decoded to a python dict as before. Encoding to the old format is no longer
+supported as it was never correct and loses type information.
+Added support for $numberLong and $undefined - new in MongoDB 2.6 - and
+parsing $date in ISO-8601 format.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.7: </span>Preserves order when rendering SON, Timestamp, Code, Binary, and DBRef
+instances.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.3: </span>Added dumps and loads helpers to automatically handle conversion to and
+from json and supports <a class="reference internal" href="binary.html#bson.binary.Binary" title="bson.binary.Binary"><code class="xref py py-class docutils literal"><span class="pre">Binary</span></code></a> and
+<a class="reference internal" href="code.html#bson.code.Code" title="bson.code.Code"><code class="xref py py-class docutils literal"><span class="pre">Code</span></code></a></p>
+</div>
+<dl class="function">
+<dt id="bson.json_util.default">
+<code class="descclassname">bson.json_util.</code><code class="descname">default</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.json_util.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="bson.json_util.dumps">
+<code class="descclassname">bson.json_util.</code><code class="descname">dumps</code><span class="sig-paren">(</span><em>obj</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.json_util.dumps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function that wraps <code class="xref py py-class docutils literal"><span class="pre">json.dumps</span></code>.</p>
+<p>Recursive function that handles all BSON types including
+<a class="reference internal" href="binary.html#bson.binary.Binary" title="bson.binary.Binary"><code class="xref py py-class docutils literal"><span class="pre">Binary</span></code></a> and <a class="reference internal" href="code.html#bson.code.Code" title="bson.code.Code"><code class="xref py py-class docutils literal"><span class="pre">Code</span></code></a>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.7: </span>Preserves order when rendering SON, Timestamp, Code, Binary, and DBRef
+instances.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="bson.json_util.loads">
+<code class="descclassname">bson.json_util.</code><code class="descname">loads</code><span class="sig-paren">(</span><em>s</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.json_util.loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function that wraps <code class="xref py py-class docutils literal"><span class="pre">json.loads</span></code>.</p>
+<p>Automatically passes the object_hook for BSON type conversion.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bson.json_util.object_hook">
+<code class="descclassname">bson.json_util.</code><code class="descname">object_hook</code><span class="sig-paren">(</span><em>dct</em><span class="sig-paren">)</span><a class="headerlink" href="#bson.json_util.object_hook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="int64.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">int64</span></code> &#8211; Tools for representing BSON int64</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="max_key.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">max_key</span></code> &#8211; Representation for the MongoDB internal MaxKey type</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/bson/json_util.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="max_key.html" title="max_key – Representation for the MongoDB internal MaxKey type"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="int64.html" title="int64 – Tools for representing BSON int64"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyMongo 3.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >API Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="docutils literal"><span class="pre">bson</span></code> &#8211; BSON (Binary JSON) Encoding and Decoding</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008 - 2015, MongoDB, Inc..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>
